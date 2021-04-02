@@ -6,16 +6,16 @@ import (
 )
 
 type Repository interface {
-	Name() string
-	Columns() []string
+	TableName() string
+	TableColumns() []string
 }
 
 func ColumnNamesExclusive(repository Repository, exclude ...string) string {
-	return strings.Join(RemoveExcludedFromSlice(repository.Columns(), exclude), ",")
+	return strings.Join(RemoveExcludedFromSlice(repository.TableColumns(), exclude), ",")
 }
 
 func ColumnNamesInclusive(repository Repository, include ...string) string {
-	return strings.Join(KeepIncludedInSlice(repository.Columns(), include), ",")
+	return strings.Join(KeepIncludedInSlice(repository.TableColumns(), include), ",")
 }
 
 func PrepareBatchValues(paramLength int, valueLength int) string {
