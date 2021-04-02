@@ -1,4 +1,4 @@
-package helpers
+package goutils
 
 func RemoveExcludedFromSlice(slice []string, exclude []string) []string {
 	var excludedSlice []string
