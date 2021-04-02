@@ -5,17 +5,17 @@ import (
 	"strings"
 )
 
-type Repository interface {
+type Model interface {
 	TableName() string
 	TableColumns() []string
 }
 
-func ColumnNamesExclusive(repository Repository, exclude ...string) string {
-	return strings.Join(RemoveExcludedFromSlice(repository.TableColumns(), exclude), ",")
+func ColumnNamesExclusive(model Model, exclude ...string) string {
+	return strings.Join(RemoveExcludedFromSlice(model.TableColumns(), exclude), ",")
 }
 
-func ColumnNamesInclusive(repository Repository, include ...string) string {
-	return strings.Join(KeepIncludedInSlice(repository.TableColumns(), include), ",")
+func ColumnNamesInclusive(model Model, include ...string) string {
+	return strings.Join(KeepIncludedInSlice(model.TableColumns(), include), ",")
 }
 
 func PrepareBatchValues(paramLength int, valueLength int) string {
