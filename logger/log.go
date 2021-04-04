@@ -45,9 +45,9 @@ type LogMessage struct {
 	Message   string
 }
 
-func Setup(verbosity string, callback LogCallback, options *LoggerOptions) {
+func Setup(verbosity VerbosityLevel, callback LogCallback, options *LoggerOptions) {
 	LoggerInstance = &Logger{
-		Verbosity: getVerbosity(verbosity),
+		Verbosity: verbosity,
 		Callback:  callback,
 		Options:   options,
 	}
@@ -84,8 +84,10 @@ func getVerbosity(level string) VerbosityLevel {
 	verbosityLevels["trace"] = Trace
 
 	var verbosity VerbosityLevel
-	if verbosity, ok := verbosityLevels[strings.ToLower(level)]; !ok {
-		log.Fatalf("Unknown log verbosity %s", verbosity)
+	if v, ok := verbosityLevels[strings.ToLower(level)]; !ok {
+		log.Fatalf("Unknown log verbosity %s", v)
+	} else {
+		verbosity = v
 	}
 
 	return verbosity
