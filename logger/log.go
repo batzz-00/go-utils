@@ -72,7 +72,7 @@ func (d VerbosityLevel) String() string {
 }
 
 func (d VerbosityLevel) Colour() color.Attribute {
-	return []color.Attribute{color.FgGreen, color.FgBlue, color.FgYellow, color.FgRed}[d]
+	return []color.Attribute{color.FgMagenta, color.FgBlue, color.FgYellow, color.FgRed, color.FgGreen}[d]
 }
 
 func getVerbosity(level string) VerbosityLevel {
