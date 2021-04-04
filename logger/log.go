@@ -18,9 +18,10 @@ var LoggerInstance *Logger
 
 const (
 	Debug VerbosityLevel = iota
-	Notice
+	Info
 	Warning
 	Error
+	Trace
 )
 
 type LoggerOptions struct {
@@ -67,7 +68,7 @@ func Log(message interface{}, level VerbosityLevel, data ...interface{}) {
 }
 
 func (d VerbosityLevel) String() string {
-	return []string{"Debug", "Notice", "Warning", "Error"}[d]
+	return []string{"Debug", "Info", "Warning", "Error", "Trace"}[d]
 }
 
 func (d VerbosityLevel) Colour() color.Attribute {
@@ -77,9 +78,10 @@ func (d VerbosityLevel) Colour() color.Attribute {
 func getVerbosity(level string) VerbosityLevel {
 	verbosityLevels := make(map[string]VerbosityLevel)
 	verbosityLevels["debug"] = Debug
-	verbosityLevels["notice"] = Notice
+	verbosityLevels["info"] = Info
 	verbosityLevels["warning"] = Warning
 	verbosityLevels["error"] = Error
+	verbosityLevels["trace"] = Trace
 
 	var verbosity VerbosityLevel
 	if verbosity, ok := verbosityLevels[strings.ToLower(level)]; !ok {
